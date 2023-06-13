@@ -1,0 +1,33 @@
+.side-nav-wrapper {
+    width: 200px;
+    border-right: solid 1px #eaeaea;
+    padding: 30px;
+    background-color: #eaeaea;
+    color: #333333;
+    height: calc(100vh - 50px);
+    overflow: auto;
+    font-family: Arial;
+}
+
+.side-nav-wrapper h4 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.side-nav-wrapper ul {
+    list-style-type: none;
+}
+
+.side-nav-wrapper li {
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.side-nav-wrapper a {
+    text-decoration: none;
+    color: #999999;
+}
+
+.side-nav-wrapper a:hover {
+    color: #333333
+}

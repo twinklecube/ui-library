@@ -1,0 +1,6 @@
+.container-wrapper {
+    flex: 1;
+    height: calc(100vh - 50px);
+    padding: 10px;
+    overflow: auto;
+}
