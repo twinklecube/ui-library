@@ -5,6 +5,7 @@ import Homepage from "../homepage/Homepage";
 // @ts-ignore
 import style from "./style.module.css"
 import FooterTwinklecube from "../../../src/components/footer/Footer.twinklecube";
+import ToggleTwinklecube from "../../../src/components/toggle/Toggle.twinklecube";
 
 const Container = () => {
     return (
@@ -12,6 +13,7 @@ const Container = () => {
             <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/footer" element={<FooterTwinklecube />} />
+                <Route path="/toggle" element={<ToggleTwinklecube />} />
             </Routes>
         </div>
     );

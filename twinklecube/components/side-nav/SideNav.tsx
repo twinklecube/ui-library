@@ -9,10 +9,9 @@ const SideNav = () => {
             <nav>
                 <h4>Atoms</h4>
                     <ul>
-
+                        <li><Link to="/toggle">toggle</Link></li>
                     </ul>
-
-                {/*following is another category*/}
+                
                 <h4>Molecules</h4>
                 <ul>
                     <li><Link to="/footer">footer</Link></li>
