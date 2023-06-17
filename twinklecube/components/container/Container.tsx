@@ -6,6 +6,9 @@ import Homepage from "../homepage/Homepage";
 import style from "./style.module.css"
 import FooterTwinklecube from "../../../src/components/footer/Footer.twinklecube";
 import ToggleTwinklecube from "../../../src/components/toggle/Toggle.twinklecube";
+import OverlayBackdropTwinklecube from '../../../src/components/overlay-backdrop/OverlayBackdrop.twinklecube';
+import CookieDialogTwinklecube from '../../../src/components/cookie-dialog/CookieDialog.twinklecube';
+import ButtonTwinklecube from '../../../src/components/button/Button.twinklecube';
 
 const Container = () => {
     return (
@@ -14,6 +17,9 @@ const Container = () => {
                 <Route path="/" element={<Homepage />} />
                 <Route path="/footer" element={<FooterTwinklecube />} />
                 <Route path="/toggle" element={<ToggleTwinklecube />} />
+                <Route path="/overlay-backdrop" element={<OverlayBackdropTwinklecube />} />
+                <Route path="/cookie-dialog" element={<CookieDialogTwinklecube />} />
+                <Route path="/button" element={<ButtonTwinklecube />} />
             </Routes>
         </div>
     );
