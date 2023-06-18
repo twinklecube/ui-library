@@ -3,7 +3,9 @@ import {Footer} from "./Footer";
 
 const FooterTwinklecube: FC = () => {
     return (
-        <Footer />
+        <div style={{fontFamily: 'arial', background: '#092231', padding: '2rem'}}>
+            <Footer />
+        </div>
     );
 };
 
