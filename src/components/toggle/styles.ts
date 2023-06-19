@@ -23,7 +23,7 @@ export const ToggleLabel = styled.label<ToggleLabelProps>`
   position: relative;
   cursor: pointer;
   transition: 0.5s;
-  box-shadow: 0 0 20px #477a8550;
+  //box-shadow: 0 0 20px #477a8550;
 
   &::after {
     content: "";

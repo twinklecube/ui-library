@@ -1,5 +1,8 @@
 export enum Colors {
-    SECONDARY='#fc861d',
     WHITE='#ffffff',
-    DISABLED='#d9d9d9'
+    BLACK='#000000',
+    SECONDARY='#fc861d',
+    SECONDARY_DARKER='#b96011',
+    DISABLED='#d9d9d9',
+    GREY='#595959',
 }
