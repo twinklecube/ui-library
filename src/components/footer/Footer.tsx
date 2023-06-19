@@ -11,7 +11,7 @@ export const Footer: FC  = () => {
     useEffect(() => {
         setTimeout(() => {
             setShowCookieDialog(!getCookie(CookieNames.TC_COOKIE_CONSENT))
-        }, 0)
+        }, 500)
     }, [])
 
     const onCookieAccept = () => {

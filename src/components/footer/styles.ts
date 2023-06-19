@@ -4,7 +4,7 @@ import {Colors} from "../../utils";
 export const FooterWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 2rem 0;
+  margin: 1rem 0;
   gap: 0.5rem;
 `;
 
