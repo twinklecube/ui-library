@@ -28,7 +28,7 @@ export const Footer: FC  = () => {
             <FooterLinks>
                 <Hyperlink fontSize={12} url="/legal/impressum" color={Colors.WHITE}>Impressum</Hyperlink>
                 <Hyperlink fontSize={12} url='/legal/datenschutz' color={Colors.WHITE}>Datenschutz</Hyperlink>
-                <Hyperlink fontSize={12} url='/legal/cookie-policy' color={Colors.WHITE}>Cookie policy</Hyperlink>
+                <Hyperlink fontSize={12} url='/legal/cookieuebersicht' color={Colors.WHITE}>Cookieübersicht</Hyperlink>
                 <Hyperlink
                     fontSize={12}
                     onClick={handleReviewCookiePolicy}

@@ -155,7 +155,7 @@ const CookieDialog: FC<Props> = ({onCookieAccept}) => {
                             Alle zulassen
                         </Button>
                     </CookieDialogFooterButtons>
-                    <Hyperlink url='/legal/cookie-policy' fontSize={14}>Cookie policy</Hyperlink>
+                    <Hyperlink url='/legal/cookieuebersicht' fontSize={14}>Cookieübersicht</Hyperlink>
                 </CookieDialogFooter>
             </CookieDialogWrapper>
         </OverlayBackdrop>
