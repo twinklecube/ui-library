@@ -3,23 +3,24 @@ export enum CookieNames {
     TC_COOKIE_NECESSARY = 'tc_cookie_necessary',
     TC_COOKIE_FUNCTIONAL = 'tc_cookie_functional',
     TC_COOKIE_ANALYSIS = 'tc_cookie_analysis',
-    TC_COOKIE_ADVERTISEMENT = 'tc_cookie_advertisement'
+    TC_COOKIE_ADVERTISEMENT = 'tc_cookie_advertisement',
+    TC_COOKIE_CONSENT_ID= 'tc_cookie_consent_id'
 }
 
-export const setCookie = (name: string, value: boolean) => {
-    const maxAge = 60 * 60 * 24 * 180;
+export const setCookie = (name: string, value: boolean, numDays: number) => {
+    const maxAge = 60 * 60 * 24 * numDays;
     document.cookie = `${name}=${value}; max-age=${maxAge}; sameSite=none; Secure`;
 }
 
 export const setCookieConsentCookies = (functional: boolean, analysis: boolean, advertisement: boolean) => {
-    setCookie(CookieNames.TC_COOKIE_CONSENT, true);
-    setCookie(CookieNames.TC_COOKIE_NECESSARY, true);
-    setCookie(CookieNames.TC_COOKIE_FUNCTIONAL, functional);
-    setCookie(CookieNames.TC_COOKIE_ANALYSIS, analysis);
-    setCookie(CookieNames.TC_COOKIE_ADVERTISEMENT, advertisement);
+    setCookie(CookieNames.TC_COOKIE_CONSENT, true, 180);
+    setCookie(CookieNames.TC_COOKIE_NECESSARY, true, 180);
+    setCookie(CookieNames.TC_COOKIE_FUNCTIONAL, functional, 180);
+    setCookie(CookieNames.TC_COOKIE_ANALYSIS, analysis, 180);
+    setCookie(CookieNames.TC_COOKIE_ADVERTISEMENT, advertisement, 180);
 }
 
-export const getCookie = (name: string): boolean => {
+export const getCookie = (name: string) => {
     const cookies = document.cookie;
     const cookieValue = cookies
         .split("; ")
@@ -30,13 +31,17 @@ export const getCookie = (name: string): boolean => {
         return false;
     }
 
-    return cookieValue === 'true';
+    return cookieValue;
 }
 
 export const getCookieConsentCookies = () => {
+    const functional = getCookie(CookieNames.TC_COOKIE_FUNCTIONAL) === 'true';
+    const analysis = getCookie(CookieNames.TC_COOKIE_ANALYSIS) === 'true';
+    const advertisement = getCookie(CookieNames.TC_COOKIE_ADVERTISEMENT) === 'true';
     return {
-        functional: getCookie(CookieNames.TC_COOKIE_FUNCTIONAL),
-        analysis: getCookie(CookieNames.TC_COOKIE_ANALYSIS),
-        advertisement: getCookie(CookieNames.TC_COOKIE_ADVERTISEMENT)
+        functional,
+        analysis,
+        advertisement,
+        cookieConsentId: getCookie(CookieNames.TC_COOKIE_CONSENT_ID)
     }
 }

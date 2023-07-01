@@ -26,33 +26,30 @@ interface Props {
 
 const CookieDialog: FC<Props> = ({onCookieAccept}) => {
     const [showSettings, setShowSettings] = useState<boolean>(false);
-    const [functionalCookies, setFunctionalCookies] = useState(false);
-    const [analysisCookies, setAnalysisCookies] = useState(false);
-    const [advertisementCookies, setAdvertisementCookies] = useState(false);
+    const [functionalCookies, setFunctionalCookies] = useState<boolean>(false);
+    const [analysisCookies, setAnalysisCookies] = useState<boolean>(false);
+    const [advertisementCookies, setAdvertisementCookies] = useState<boolean>(false);
 
     useEffect(() => {
-        const {functional, analysis, advertisement} = getCookieConsentCookies();
+        const {functional, analysis, advertisement, cookieConsentId} = getCookieConsentCookies();
         setFunctionalCookies(functional);
         setAnalysisCookies(analysis);
         setAdvertisementCookies(advertisement);
     }, []);
-    const handleShowSettingsClick = () => {
-        setShowSettings(prevState => !prevState);
-    }
 
-    const handleAcceptSelectedCookies = () => {
-        onCookieAccept();
+    useEffect(() => {
+        handleCookies();
+        // console.log(functionalCookies, analysisCookies, advertisementCookies)
+    },[functionalCookies, analysisCookies, advertisementCookies])
+
+    const handleCookies = () => {
+        // onCookieAccept();
+        // console.log(functionalCookies)
         setCookieConsentCookies(functionalCookies, analysisCookies, advertisementCookies);
     }
 
-    const handleRejectAllCookies = () => {
-        onCookieAccept();
-        setCookieConsentCookies(false, false, false);
-    }
-
-    const handleAcceptAllCookies = () => {
-        onCookieAccept();
-        setCookieConsentCookies(true, true, true);
+    const handleShowSettingsClick = () => {
+        setShowSettings(prevState => !prevState);
     }
 
     return (
@@ -77,64 +74,64 @@ const CookieDialog: FC<Props> = ({onCookieAccept}) => {
                         <Hyperlink url='/legal/impressum' fontSize={14}>Impressum</Hyperlink>
                     </CookieDialogBodyLinks>
                     {showSettings && <CookieDialogSettings>
-                            <CookieSettingItem
-                                sectionName="Notwendig"
-                                sectionDescription={<>
-                                    <p>
-                                        Notwendige Cookies sind für die Grundfunktionen der Website von entscheidender
-                                        Bedeutung. Ohne sie kann die Website nicht in der vorgesehenen Weise funktionieren.
-                                    </p>
-                                    <p>Diese Cookies speichern keine personenbezogenen Daten.</p>
-                                </>}
-                                alwaysActive
-                            />
-                            <CookieSettingItem
-                                sectionName="Funktionale"
-                                toggleId="functionale"
-                                toggleOnClick={() => setFunctionalCookies(prevState => !prevState)}
-                                toggleEnabled={functionalCookies}
-                                sectionDescription={<>
-                                    <p>
-                                        Funktionale Cookies unterstützen bei der Ausführung bestimmter Funktionen,
-                                        z. B. beim Teilen des Inhalts der Website auf Social Media-Plattformen,
-                                        beim Sammeln von Feedbacks und anderen Funktionen von Drittanbietern.
-                                    </p>
-                                </>}
-                            />
-                            <CookieSettingItem
-                                sectionName="Analyse"
-                                toggleId="analyse"
-                                toggleOnClick={() => setAnalysisCookies(prevState => !prevState)}
-                                toggleEnabled={analysisCookies}
-                                sectionDescription={<>
-                                    <p>
-                                        Analyse-Cookies werden verwendet um zu verstehen, wie Besucher mit der Website
-                                        interagieren. Diese Cookies dienen zu Aussagen über die Anzahl der Besucher,
-                                        Absprungrate, Herkunft der Besucher usw.
-                                    </p>
-                                </>}
-                            />
-                            <CookieSettingItem
-                                sectionName="Werbe"
-                                toggleId="werbe"
-                                toggleOnClick={() => setAdvertisementCookies(prevState => !prevState)}
-                                toggleEnabled={advertisementCookies}
-                                sectionDescription={<>
-                                    <p>
-                                        Werbe-Cookies werden verwendet, um Besuchern auf der Grundlage der von ihnen zuvor
-                                        besuchten Seiten maßgeschneiderte Werbung zu liefern und die Wirksamkeit von
-                                        Werbekampagne nzu analysieren.
-                                    </p>
-                                </>}
-                            />
-                            <CookieDialogAcceptSelectedLink>
-                                <Hyperlink
-                                    fontSize={14}
-                                    color={Colors.SECONDARY}
-                                    hoverColor={Colors.SECONDARY_DARKER}
-                                    onClick={handleAcceptSelectedCookies}
-                                >Ausgewählte akzeptieren</Hyperlink>
-                            </CookieDialogAcceptSelectedLink>
+                        <CookieSettingItem
+                            sectionName="Notwendig"
+                            sectionDescription={<>
+                                <p>
+                                    Notwendige Cookies sind für die Grundfunktionen der Website von entscheidender
+                                    Bedeutung. Ohne sie kann die Website nicht in der vorgesehenen Weise funktionieren.
+                                </p>
+                                <p>Diese Cookies speichern keine personenbezogenen Daten.</p>
+                            </>}
+                            alwaysActive
+                        />
+                        <CookieSettingItem
+                            sectionName="Funktionale"
+                            toggleId="functionale"
+                            toggleOnClick={() => setFunctionalCookies(prevState => !prevState)}
+                            toggleEnabled={functionalCookies}
+                            sectionDescription={<>
+                                <p>
+                                    Funktionale Cookies unterstützen bei der Ausführung bestimmter Funktionen,
+                                    z. B. beim Teilen des Inhalts der Website auf Social Media-Plattformen,
+                                    beim Sammeln von Feedbacks und anderen Funktionen von Drittanbietern.
+                                </p>
+                            </>}
+                        />
+                        <CookieSettingItem
+                            sectionName="Analyse"
+                            toggleId="analyse"
+                            toggleOnClick={() => setAnalysisCookies(prevState => !prevState)}
+                            toggleEnabled={analysisCookies}
+                            sectionDescription={<>
+                                <p>
+                                    Analyse-Cookies werden verwendet um zu verstehen, wie Besucher mit der Website
+                                    interagieren. Diese Cookies dienen zu Aussagen über die Anzahl der Besucher,
+                                    Absprungrate, Herkunft der Besucher usw.
+                                </p>
+                            </>}
+                        />
+                        <CookieSettingItem
+                            sectionName="Werbe"
+                            toggleId="werbe"
+                            toggleOnClick={() => setAdvertisementCookies(prevState => !prevState)}
+                            toggleEnabled={advertisementCookies}
+                            sectionDescription={<>
+                                <p>
+                                    Werbe-Cookies werden verwendet, um Besuchern auf der Grundlage der von ihnen zuvor
+                                    besuchten Seiten maßgeschneiderte Werbung zu liefern und die Wirksamkeit von
+                                    Werbekampagne nzu analysieren.
+                                </p>
+                            </>}
+                        />
+                        <CookieDialogAcceptSelectedLink>
+                            <Hyperlink
+                                fontSize={14}
+                                color={Colors.SECONDARY}
+                                hoverColor={Colors.SECONDARY_DARKER}
+                                onClick={handleCookies}
+                            >Ausgewählte akzeptieren</Hyperlink>
+                        </CookieDialogAcceptSelectedLink>
                         </CookieDialogSettings>}
 
                 </CookieDialogBody>
@@ -144,13 +141,22 @@ const CookieDialog: FC<Props> = ({onCookieAccept}) => {
                             buttonSize={ButtonSize.SMALL}
                             buttonType={ButtonType.PRIMARY_INVERSE}
                             streched
-                            onClick={handleRejectAllCookies}
+                            onClick={() => {
+                                setFunctionalCookies(false);
+                                setAnalysisCookies(false);
+                                setAdvertisementCookies(false);
+                            }
+                            }
                         >
                             Alle ablehnen</Button>
                         <Button
                             buttonSize={ButtonSize.SMALL}
                             streched
-                            onClick={handleAcceptAllCookies}
+                            onClick={() => {
+                                setFunctionalCookies(true);
+                                setAnalysisCookies(true);
+                                setAdvertisementCookies(true);
+                            }}
                         >
                             Alle zulassen
                         </Button>
