@@ -38,18 +38,20 @@ const CookieDialog: FC<Props> = ({onCookieAccept}) => {
     }, []);
 
     useEffect(() => {
-        handleCookies();
-        // console.log(functionalCookies, analysisCookies, advertisementCookies)
-    },[functionalCookies, analysisCookies, advertisementCookies])
-
-    const handleCookies = () => {
-        // onCookieAccept();
-        // console.log(functionalCookies)
         setCookieConsentCookies(functionalCookies, analysisCookies, advertisementCookies);
-    }
+    },[functionalCookies, analysisCookies, advertisementCookies])
 
     const handleShowSettingsClick = () => {
         setShowSettings(prevState => !prevState);
+    }
+
+    const handleAllClick = (choice: boolean) => {
+        setFunctionalCookies(choice);
+        setAnalysisCookies(choice);
+        setAdvertisementCookies(choice);
+        setTimeout(() => {
+            onCookieAccept();
+        }, 0)
     }
 
     return (
@@ -129,7 +131,7 @@ const CookieDialog: FC<Props> = ({onCookieAccept}) => {
                                 fontSize={14}
                                 color={Colors.SECONDARY}
                                 hoverColor={Colors.SECONDARY_DARKER}
-                                onClick={handleCookies}
+                                onClick={onCookieAccept}
                             >Ausgewählte akzeptieren</Hyperlink>
                         </CookieDialogAcceptSelectedLink>
                         </CookieDialogSettings>}
@@ -141,22 +143,13 @@ const CookieDialog: FC<Props> = ({onCookieAccept}) => {
                             buttonSize={ButtonSize.SMALL}
                             buttonType={ButtonType.PRIMARY_INVERSE}
                             streched
-                            onClick={() => {
-                                setFunctionalCookies(false);
-                                setAnalysisCookies(false);
-                                setAdvertisementCookies(false);
-                            }
-                            }
+                            onClick={() => handleAllClick(false)}
                         >
                             Alle ablehnen</Button>
                         <Button
                             buttonSize={ButtonSize.SMALL}
                             streched
-                            onClick={() => {
-                                setFunctionalCookies(true);
-                                setAnalysisCookies(true);
-                                setAdvertisementCookies(true);
-                            }}
+                            onClick={() => handleAllClick(true)}
                         >
                             Alle zulassen
                         </Button>
