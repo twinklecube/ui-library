@@ -1,6 +1,6 @@
-import React, {FC, useState } from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import { ToggleCheckBox, ToggleLabel } from "./styles";
-import {Colors} from '../../utils/colors';
+import {Colors} from '../../utils';
 interface Props {
     id: string;
     onClick: () => void;
@@ -20,6 +20,11 @@ const Toggle: FC<Props> = ({
     enabledForegroundColor = Colors.WHITE
 }) => {
     const [check, setCheck] = useState<boolean>(enabled);
+
+    useEffect(() => {
+        setCheck(enabled)
+    }, [enabled])
+
     const handleClick = () => {
         setCheck((prevState) => !prevState);
         onClick()
