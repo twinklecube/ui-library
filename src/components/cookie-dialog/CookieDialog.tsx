@@ -19,6 +19,7 @@ import {
     getCookieConsentCookies,
     setCookieConsentCookies
 } from "../../utils";
+import {v1 as uuidv1} from 'uuid';
 
 interface Props {
     onCookieAccept: () => void
@@ -29,23 +30,46 @@ const CookieDialog: FC<Props> = ({onCookieAccept}) => {
     const [functionalCookies, setFunctionalCookies] = useState<boolean>(false);
     const [analysisCookies, setAnalysisCookies] = useState<boolean>(false);
     const [advertisementCookies, setAdvertisementCookies] = useState<boolean>(false);
+    const [cookieConsentIdValue, setCookieConsentIdValue] = useState<string | boolean>(false);
+    const [cookieConsent, setCookieConsent] = useState<boolean>(false);
 
     useEffect(() => {
         const {functional, analysis, advertisement, cookieConsentId} = getCookieConsentCookies();
         setFunctionalCookies(functional);
         setAnalysisCookies(analysis);
         setAdvertisementCookies(advertisement);
+        setCookieConsentIdValue(cookieConsentId || uuidv1())
     }, []);
 
     useEffect(() => {
-        setCookieConsentCookies(functionalCookies, analysisCookies, advertisementCookies);
-    },[functionalCookies, analysisCookies, advertisementCookies])
+        console.log(cookieConsentIdValue)
+        if (cookieConsent) {
+            setCookieConsentCookies(functionalCookies, analysisCookies, advertisementCookies, cookieConsentIdValue);
+            const device = window.navigator.userAgent
+
+            fetch('https://twinklecube.com/cookie-consent', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    cookieConsentIdValue,
+                    device,
+                    functionalCookies,
+                    analysisCookies,
+                    advertisementCookies
+                })
+            });
+        }
+    },[cookieConsent])
 
     const handleShowSettingsClick = () => {
         setShowSettings(prevState => !prevState);
     }
 
     const handleAllClick = (choice: boolean) => {
+        setCookieConsent(true);
         setFunctionalCookies(choice);
         setAnalysisCookies(choice);
         setAdvertisementCookies(choice);
@@ -131,7 +155,12 @@ const CookieDialog: FC<Props> = ({onCookieAccept}) => {
                                 fontSize={14}
                                 color={Colors.SECONDARY}
                                 hoverColor={Colors.SECONDARY_DARKER}
-                                onClick={onCookieAccept}
+                                onClick={() => {
+                                    setCookieConsent(true);
+                                    setTimeout(() => {
+                                        onCookieAccept();
+                                    }, 0)
+                                }}
                             >Ausgewählte akzeptieren</Hyperlink>
                         </CookieDialogAcceptSelectedLink>
                         </CookieDialogSettings>}
