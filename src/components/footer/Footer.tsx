@@ -4,18 +4,23 @@ import {CookieNames, getCookie} from "../../utils";
 import {FooterCopyRight, FooterLinks, FooterWrapper} from "./styles";
 import Hyperlink from "../hyperlink/Hyperlink";
 import {Colors, Icons} from "../../utils";
+import GoogleAdSense from "../google-ad-sense/googleAdSense";
 
 export const Footer: FC  = () => {
     const [showCookieDialog, setShowCookieDialog] = useState(false);
+    const [necessaryAdCookies, setNecessaryAdCookies] = useState(false);
 
     useEffect(() => {
+        const tcCookieConsent = getCookie(CookieNames.TC_COOKIE_CONSENT);
+        tcCookieConsent && setNecessaryAdCookies(true);
         setTimeout(() => {
-            setShowCookieDialog(!getCookie(CookieNames.TC_COOKIE_CONSENT))
-        }, 500)
-    }, [])
+            setShowCookieDialog(!tcCookieConsent);
+        }, 500);
+    }, []);
 
     const onCookieAccept = () => {
         setShowCookieDialog(false);
+        setNecessaryAdCookies(true);
     }
 
     const handleReviewCookiePolicy = () => {
@@ -41,6 +46,7 @@ export const Footer: FC  = () => {
                 &copy;
                 2023 Twinklecube. Alle Rechte vorbehalten.
             </FooterCopyRight>
+            {necessaryAdCookies && <GoogleAdSense />}
         </FooterWrapper>
     );
 };
