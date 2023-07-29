@@ -46,7 +46,7 @@ export const Footer: FC  = () => {
                 &copy;
                 2023 Twinklecube. Alle Rechte vorbehalten.
             </FooterCopyRight>
-            {necessaryAdCookies && <GoogleAdSense />}
+            {/*{necessaryAdCookies && <GoogleAdSense />}*/}
         </FooterWrapper>
     );
 };
