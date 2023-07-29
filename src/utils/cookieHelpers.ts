@@ -9,7 +9,7 @@ export enum CookieNames {
 
 export const setCookie = (name: string, value: string | boolean, numDays: number) => {
     const maxAge = 60 * 60 * 24 * numDays;
-    document.cookie = `${name}=${value}; max-age=${maxAge}; sameSite=none; Secure`;
+    document.cookie = `${name}=${value}; max-age=${maxAge}`;
 }
 
 export const setCookieConsentCookies = (functional: boolean, analysis: boolean, advertisement: boolean, cookieConsentId: string | boolean) => {
