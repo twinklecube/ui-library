@@ -6,7 +6,7 @@ interface OverlayBackdropWrapperProps {
 export const OverlayBackdropWrapper = styled.div<OverlayBackdropWrapperProps>`
   width: 100%;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: ${props => props.backgroundColor};
